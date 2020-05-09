@@ -1,6 +1,6 @@
 <template>
   <v-toolbar>
-    <v-toolbar-title>RTSPF</v-toolbar-title>
+    <v-toolbar-title>SinglePageForum</v-toolbar-title>
     <v-spacer></v-spacer>
     <div class="hidden-sm-and-down">
     <router-link to="/forum">
