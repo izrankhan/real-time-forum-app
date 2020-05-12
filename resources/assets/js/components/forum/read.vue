@@ -10,6 +10,10 @@
       v-else
       :data= question
     ></show-question>
+    <v-container>
+    <replies :question="question"></replies>
+    <new-reply :questionSlug="question.slug"></new-reply>
+    </v-container>
   </div>
 
 
@@ -20,10 +24,12 @@
 
 import ShowQuestion from './ShowQuestion'
 import editQuestion from './editQuestion'
+import Replies from '../reply/replies'
+import NewReply from '../reply/newReply'
 
 export default{
 
-  components:{ShowQuestion,editQuestion},
+  components:{ShowQuestion,editQuestion,Replies,NewReply},
   data(){
 
     return{
