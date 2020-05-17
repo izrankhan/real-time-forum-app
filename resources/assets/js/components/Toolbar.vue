@@ -2,6 +2,7 @@
   <v-toolbar>
     <v-toolbar-title>SinglePageForum</v-toolbar-title>
     <v-spacer></v-spacer>
+    <app-notification v-if="loggedIn"></app-notification>
     <div class="hidden-sm-and-down">
     <router-link
     v-for="item in items"
@@ -18,32 +19,26 @@
 
 <script>
 
-export default{
-	
-    data(){
-
-      return{
-
-          items: [
-
-            {title: 'Forum', to:'/forum', show:true},
-            {title: 'Ask Question', to:'/ask', show:User.loggedIn()},
-            {title: 'Category', to:'/category', show:User.admin()},
-            {title: 'Login', to:'/login', show: !User.loggedIn()},
-            {title: 'Logout', to:'/logout', show:User.loggedIn()},
-
-          ]
-      }
-    },
-
-    created(){
-
-        EventBus.$on('logout', () => {
-          User.logout()
-        })
+import AppNotification from './AppNotification'
+export default {
+  components:{AppNotification},
+  data(){
+    return {
+      loggedIn: User.loggedIn(),
+      items: [
+        {title : 'Forum', to:'/forum',show:true},
+        {title : 'Ask Question', to:'/ask',show: User.loggedIn()},
+        {title : 'Category', to:'/category',show: User.admin()},
+        {title : 'Login', to:'/login',show: !User.loggedIn()},
+        {title : 'Logout', to:'/logout',show: User.loggedIn()},
+      ]
     }
-
-
+  },
+  created(){
+    EventBus.$on('logout', () => {
+      User.logout()
+    })
+  }
 }
 
 

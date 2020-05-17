@@ -20,6 +20,8 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "laravel-echo": "^1.8.0",
+        "pusher-js": "^6.0.3",
         "vue-router": "^3.0.1",
         "vue-simplemde": "^0.4.6",
         "vuetify": "^1.0.19"
