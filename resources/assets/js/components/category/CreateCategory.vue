@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <v-alert v-if="errors" :value="true" type="error">
+      Please give a Category Name!
+    </v-alert>
       <v-form @submit.prevent="submit">
         <v-text-field
           label="Category Name"
@@ -8,11 +11,11 @@
           required
         ></v-text-field>
 
-        <v-btn color="green" type="submit" v-if="editSlug">
+        <v-btn color="green" :disabled="disable" type="submit" v-if="editSlug">
           Update
         </v-btn>
 
-        <v-btn color="blue" type="submit" v-else>
+        <v-btn color="blue"  :disabled="disable" type="submit" v-else>
           Create
         </v-btn>
 
@@ -61,7 +64,8 @@ export default{
             },
 
             categories:{},
-            editSlug:null
+            editSlug:null,
+            errors:null
         }
     },
       created(){
@@ -96,6 +100,8 @@ export default{
                   this.categories.unshift(res.data)
                   this.form.name = null
             })
+
+              .catch(error => this.errors = error.response.data.errors)
         },
 
         destroy(slug,index){
@@ -110,6 +116,14 @@ export default{
             this.editSlug = this.categories[index].slug
             this.categories.splice(index,1)
         }
+    },
+
+    computed:{
+
+      disable(){
+
+          return !this.form.name
+      }
     }
 
 }
